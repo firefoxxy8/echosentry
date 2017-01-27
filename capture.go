@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/getsentry/raven-go"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
 	"log"
 	"runtime/debug"
 )
@@ -66,7 +65,7 @@ func Middleware() echo.MiddlewareFunc {
 					httpContext := &raven.Http{}
 
 					if sentry.withContext {
-						httpContext = raven.NewHttp(c.Request().(*standard.Request).Request)
+						httpContext = raven.NewHttp(c.Request())
 					}
 
 					// extract tags
